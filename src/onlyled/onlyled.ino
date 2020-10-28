@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
-#define RXD2 16
-#define TXD2 17
+#define RXD2 16 // connect to TXD on MH-19
+#define TXD2 17 // connect ro RXD on MH-19
 
 
 
@@ -39,7 +39,10 @@ void setup()
 	 {
          ledscroll();
 	 }
-  calibrate();
+
+  // calibrate(); // enable to calibrate at startup
+
+
 }
 
 void loop()

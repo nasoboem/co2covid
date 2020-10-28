@@ -1,5 +1,5 @@
 # Monitoring Covid 19 Aerosol through CO2 Concentration
--------
+
 
 ## Hardware:
     
@@ -14,7 +14,7 @@
 
 ####    onlyled
 
-- only show the CO2 level on the six leds
+- show the CO2 level on the six leds
 
 ## Schematic
 
