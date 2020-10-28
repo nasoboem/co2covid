@@ -16,6 +16,10 @@
 
 - only show the CO2 level on the six leds
 
+## Schematic
+
+![Schematic](https://github.com/brouwerb/co2covid/blob/master/hardware/schematic.png?raw=true)
+
 ## flashing firmware to ESP32
 
 - download Arduino IDE
