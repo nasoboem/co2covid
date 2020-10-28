@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
-#define RXD2 16 // connect to TXD on MH-19
-#define TXD2 17 // connect ro RXD on MH-19
+#define RXD2 16
+#define TXD2 17
 
 
 
@@ -11,6 +11,7 @@ int value = 0;
 
 byte cmd[9] = {0xFF, 0x01, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00, 0x79};  // get gas command
 byte cmdCal[9] = {0xFF, 0x01, 0x87, 0x00, 0x00, 0x00, 0x00, 0x00, 0x78};  // calibrate command
+byte autoCal[9] = {0xFF, 0x01, 0x79, 0xA0, 0x00, 0x00, 0x00, 0x00, 0xE6};  // calibrate command
 char response[9];  // holds the recieved data
 
 int CO2ppm = 0;
@@ -18,7 +19,7 @@ int CO2ppm = 0;
 unsigned long warmingTimer = 0;
 unsigned long previousMillis = 0;
 
-int ledPins[] = {12, 14, 27, 26, 25, 33};
+int ledPins[] = {26, 25, 33, 27, 14, 12};
 int si = sizeof(ledPins);
 
 void setup()
@@ -33,23 +34,21 @@ void setup()
   Serial.begin(115200);
 	
   
+  Serial2.write(autoCal,9);
   
 	 warmingTimer = millis();  // initilize warmup timer
-   while (millis() - warmingTimer < 120000)
+   while (millis() - warmingTimer < 180000)
 	 {
          ledscroll();
 	 }
-
-  // calibrate(); // enable to calibrate at startup
-
-
+	 calibrate();
 }
 
 void loop()
 {
   //reconnect();
   unsigned long currentMillis = millis();
-	if ((unsigned long)(currentMillis - previousMillis) > 15000) {  // runs every 15 sec
+	if ((unsigned long)(currentMillis - previousMillis) > 5000) {  // runs every 15 sec
 	{
 		getReadings();
 		previousMillis = currentMillis;
@@ -118,14 +117,14 @@ void led(int CO2) {
   }
 
 void ledscroll(){
-   for (int index = 0; index < si; index++)
+   for (int index = 0; index <= si; index++)
   {
-    digitalWrite(ledPins[index], HIGH);
-    delay(50);
-  }
-  for (int index = si - 1; index >= 0; index--)
-  {
-    digitalWrite(ledPins[index], LOW);
-    delay(50);
+    if (index < si){
+      digitalWrite(ledPins[index], HIGH);
+    }
+    if (index > 0) {
+      digitalWrite(ledPins[index-1], LOW);
+    }
+    delay(100);
   }
 }
