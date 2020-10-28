@@ -9,7 +9,6 @@
 - 68 Ohm resistors
 - PCB or perfboard
 
-Scematic
 
 ## Code
 
