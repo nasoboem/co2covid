@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
-#define RXD2 16
-#define TXD2 17
+#define RXD2 16 // connect to TXD on MH-19
+#define TXD2 17 // connect ro RXD on MH-19
 
 
 
@@ -11,7 +11,7 @@ int value = 0;
 
 byte cmd[9] = {0xFF, 0x01, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00, 0x79};  // get gas command
 byte cmdCal[9] = {0xFF, 0x01, 0x87, 0x00, 0x00, 0x00, 0x00, 0x00, 0x78};  // calibrate command
-byte autoCal[9] = {0xFF, 0x01, 0x79, 0xA0, 0x00, 0x00, 0x00, 0x00, 0xE6};  // calibrate command
+byte autoCal[9] = {0xFF, 0x01, 0x79, 0xA0, 0x00, 0x00, 0x00, 0x00, 0xE6};  // enable autocalibration
 char response[9];  // holds the recieved data
 
 int CO2ppm = 0;
@@ -29,26 +29,26 @@ void setup()
         pinMode(ledPins[index], OUTPUT);
         digitalWrite(ledPins[index], HIGH);
     }
-	//Serial2.begin(9600,SERIAL_8N1,9,10);  // Setup a serial connection with the sensor
-  Serial2.begin(9600, SERIAL_8N1, RXD2, TXD2);
+	
+  Serial2.begin(9600, SERIAL_8N1, RXD2, TXD2); // Setup a serial connection with the sensor
   Serial.begin(115200);
 	
   
-  Serial2.write(autoCal,9);
+  //Serial2.write(autoCal,9); // activate to enable autocalibration
   
 	 warmingTimer = millis();  // initilize warmup timer
    while (millis() - warmingTimer < 180000)
 	 {
          ledscroll();
 	 }
-	 calibrate();
+	//calibrate(); // activate to calibrate at startup
 }
 
 void loop()
 {
   //reconnect();
   unsigned long currentMillis = millis();
-	if ((unsigned long)(currentMillis - previousMillis) > 5000) {  // runs every 15 sec
+	if ((unsigned long)(currentMillis - previousMillis) > 15000) {  // runs every 15 sec
 	{
 		getReadings();
 		previousMillis = currentMillis;
@@ -92,7 +92,7 @@ void calibrate()
 	delay(3000);
 }
 
-
+// translate CO2 level to LEDs
 void led(int CO2) {
 
     int lednum = 0;
@@ -116,6 +116,7 @@ void led(int CO2) {
     }
   }
 
+// animation for warmup
 void ledscroll(){
    for (int index = 0; index <= si; index++)
   {
