@@ -38,4 +38,4 @@ https://easyeda.com/koning.unauwen/co2measure_copy
 
 ## contribute
 
-if something is wrong, not clear, doesnt work or could be designed better, feel free to create an issue.
+If something is wrong, not clear, doesn't work or could be designed better, feel free to create an issue.
