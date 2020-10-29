@@ -9,6 +9,8 @@
 - 68 Ohm resistors
 - PCB or perfboard
 
+![assembled PCB](https://github.com/brouwerb/co2covid/blob/master/hardware/picture.jpg?raw=true)
+
 
 ## Code
 
