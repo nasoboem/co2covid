@@ -39,7 +39,7 @@ void setup()
   //Serial2.write(autoCal,9); // activate to enable autocalibration
   
 	 warmingTimer = millis();  // initilize warmup timer
-   while (millis() - warmingTimer < 0000)
+   while (millis() - warmingTimer < 180000) // wait for three minutes
 	 {
          ledscroll();
 	 }
@@ -62,22 +62,22 @@ void loop()
   }
 
   // check boot button to calibrate
-  if (digitalRead(0) == 0 && tim == 0)
+  if (digitalRead(0) == 0 && pressed == false)
   {
     tim = millis();
     pressed = true;
   }
-  else
+  else if (digitalRead(0) == 1)
   {
     pressed = false;
   }
   
   if (currentMillis - tim > 5000 && pressed == true)
   {
-    //calibrate();
-    blink(20);
+    calibrate();
+    blink(20); // blink for 20 minutes
   }
-  Serial.println(digitalRead(0));
+  
 
 } // loop
 
