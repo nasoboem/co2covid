@@ -6,7 +6,7 @@
 - ESP32
 - MH-Z19 CO2 sensor
 - 6x 10mm LEDs
-- 68 Ohm resistors
+- 6x 68 Ohm resistors
 - PCB or perfboard
 
 ![assembled PCB](https://github.com/brouwerb/co2covid/blob/master/hardware/picture.jpg?raw=true)

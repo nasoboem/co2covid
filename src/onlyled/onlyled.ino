@@ -19,7 +19,7 @@ int CO2ppm = 0;
 unsigned long warmingTimer = 0;
 unsigned long previousMillis = 0;
 
-int ledPins[] = {26, 25, 33, 27, 14, 12};
+int ledPins[] = {12, 14, 27, 26, 25, 33};
 int si = sizeof(ledPins);
 
 void setup()
