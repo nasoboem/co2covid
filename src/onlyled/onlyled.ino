@@ -43,7 +43,9 @@ void setup()
 	 {
          ledscroll();
 	 }
-	calibrate(); // activate to calibrate at startup
+	//calibrate(); // activate to calibrate at startup
+
+  
 }
 
 void loop()
