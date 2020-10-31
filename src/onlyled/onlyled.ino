@@ -44,6 +44,8 @@ void setup()
          ledscroll();
 	 }
 	//calibrate(); // activate to calibrate at startup
+  pinMode(0, INPUT);
+  
 
   
 }
