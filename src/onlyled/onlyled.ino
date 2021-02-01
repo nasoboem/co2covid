@@ -39,7 +39,7 @@ void setup()
   Serial2.write(autoCal,9); // activate to enable autocalibration
   
 	 warmingTimer = millis();  // initilize warmup timer
-   while (millis() - warmingTimer < 180000) // wait for three minutes
+   while (millis() - warmingTimer < 60000) // wait for one minutes - preheat time
 	 {
          ledscroll();
 	 }
