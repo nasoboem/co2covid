@@ -36,14 +36,14 @@ void setup()
   Serial.begin(115200);
 	
   
-  //Serial2.write(autoCal,9); // activate to enable autocalibration
+  Serial2.write(autoCal,9); // activate to enable autocalibration
   
 	 warmingTimer = millis();  // initilize warmup timer
    while (millis() - warmingTimer < 180000) // wait for three minutes
 	 {
          ledscroll();
 	 }
-	//calibrate(); // activate to calibrate at startup
+	calibrate(); // activate to calibrate at startup
   pinMode(0, INPUT);
   
 
@@ -75,7 +75,7 @@ void loop()
   if (currentMillis - tim > 5000 && pressed == true)
   {
     calibrate();
-    blink(20); // blink for 20 minutes
+    blink(3); // blink for 3 minutes
   }
   
 
